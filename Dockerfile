@@ -6,9 +6,6 @@ RUN apt-get update \
   && apt-get -y --force-yes install autoconf automake build-essential libass-dev libfreetype6-dev libav-tools libtheora-dev libtool libvdpau-dev libvorbis-dev pkg-config texi2html zlib1g-dev wget ffmpeg git \
   && rm -rf /var/lib/apt/lists/*
 
-RUN pip install --upgrade pip
-RUN cd ./image-service && pip install -r requirements.txt
-
 RUN wget http://www.tortall.net/projects/yasm/releases/yasm-1.2.0.tar.gz \
   && tar xvzf yasm-1.2.0.tar.gz \
   && cd yasm-1.2.0 \
