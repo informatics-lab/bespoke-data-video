@@ -14,7 +14,7 @@ def proc_cube(cube, videoname):
               cube.coord("grid_longitude").points.max(),
               cube.coord("grid_latitude").points.min(),
               cube.coord("grid_latitude").points.max(),]
-    for i, frt_cube in enumerate(cube.slices("forecast_reference_time")):
+    for i, frt_cube in enumerate(cube.slices("time")):
         print "Processing timestep ", i, "...",
         img_array, proced_data = imageservice.procDataToImage(frt_cube, "", ap.Namespace(extent=extent))
         print "Writing image"
