@@ -13,6 +13,6 @@ RUN wget http://www.tortall.net/projects/yasm/releases/yasm-1.2.0.tar.gz \
 
 ENV PATH /opt/conda/bin:$PATH
 
-ADD procile.py procile.py
+ADD procfile.py procfile.py
 
-CMD python2.7 procile.py
+CMD python2.7 procfile.py
