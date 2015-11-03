@@ -7,7 +7,7 @@ import glob
 import iris
 
 sys.path.append("./image-service/")
-import imageservice
+from imageservice import imageservice
 
 def proc_cube(cube, videoname):
     extent = [cube.coord("grid_longitude").points.min(),
