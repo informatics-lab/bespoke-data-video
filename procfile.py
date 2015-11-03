@@ -10,10 +10,10 @@ sys.path.append("./image-service/")
 import imageservice
 
 def proc_cube(cube, videoname):
-    extent = [cube.coord("longitude").points.min(),
-              cube.coord("longitude").points.max(),
-              cube.coord("latitude").points.min(),
-              cube.coord("latitude").points.max(),]
+    extent = [cube.coord("grid_longitude").points.min(),
+              cube.coord("grid_longitude").points.max(),
+              cube.coord("grid_latitude").points.min(),
+              cube.coord("grid_latitude").points.max(),]
     for i, frt_cube in enumerate(cube.slices("forecast_reference_time")):
         print "Processing timestep ", i, "...",
         img_array, proced_data = imageservice.procDataToImage(frt_cube, "", ap.Namespace(extent=extent))
