@@ -7,7 +7,7 @@ import glob
 import iris
 
 sys.path.append("./image-service/")
-from imageservice import imageservice
+from imageservice import procjob, imageproc
 
 def proc_cube(cube, videoname):
     extent = [cube.coord("grid_longitude").points.min(),
@@ -16,7 +16,7 @@ def proc_cube(cube, videoname):
               cube.coord("grid_latitude").points.max(),]
     for i, frt_cube in enumerate(cube.slices("time")):
         print "Processing timestep ", i, "...",
-        img_array, proced_data = imageservice.procDataToImage(frt_cube, "", ap.Namespace(extent=extent))
+        img_array, proced_data = procjob.procDataToImage(frt_cube, "", ap.Namespace(extent=extent))
         print "Writing image"
         with open("data%03d.png" % i, "wb") as img:
             imageproc.writePng(img_array, img, nchannels=3, alpha=False)
