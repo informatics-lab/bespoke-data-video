@@ -9,7 +9,7 @@ import iris
 sys.path.append("./image-service/")
 import imageservice
 
-def proc_cube(cube, videoname, varname):
+def proc_cube(cube, videoname):
     extent = [cube.coord("longitude").points.min(),
               cube.coord("longitude").points.max(),
               cube.coord("latitude").points.min(),
@@ -31,5 +31,9 @@ def proc_cube(cube, videoname, varname):
         os.remove(f)
         
 if __name__="__main__":
-    cube = iris.load_cube(os.getenv("FILE_IN"))
-    proc_cube(cube, os.getenv("FILE_OUT"), os.getenv("VAR_NAME"))
+    varname = os.getenv("VAR_NAME")
+    if varname != None:
+        cube = iris.load_cube(os.getenv("FILE_IN"), iris.Constraint(varname))
+    else:
+        cube = iris.load_cube(os.getenv("FILE_IN"))
+    proc_cube(cube, os.getenv("FILE_OUT"))
