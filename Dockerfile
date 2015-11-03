@@ -13,6 +13,6 @@ RUN wget http://www.tortall.net/projects/yasm/releases/yasm-1.2.0.tar.gz \
 
 ENV PATH /opt/conda/bin:$PATH
 
-ADD profile.py
+ADD profile.py profile.py
 
 CMD python2.7 profile.py
