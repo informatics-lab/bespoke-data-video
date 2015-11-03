@@ -1,3 +1,4 @@
+#poke
 FROM quay.io/informaticslab/image-service-public
 
 MAINTAINER niall.robinson@informaticslab.co.uk 
