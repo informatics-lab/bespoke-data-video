@@ -30,7 +30,7 @@ def proc_cube(cube, videoname):
     for f in fs:
         os.remove(f)
         
-if __name__="__main__":
+if __name__=="__main__":
     varname = os.getenv("VAR_NAME")
     if varname != None:
         cube = iris.load_cube(os.getenv("FILE_IN"), iris.Constraint(varname))
