@@ -11,6 +11,8 @@ RUN wget http://www.tortall.net/projects/yasm/releases/yasm-1.2.0.tar.gz \
   && cd yasm-1.2.0 \
   && ./configure && make -j 4 && make install
 
+RUN pip install pypng
+
 ENV PATH /opt/conda/bin:$PATH
 
 ADD procfile.py procfile.py
