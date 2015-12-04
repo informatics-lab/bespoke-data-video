@@ -1,3 +1,5 @@
+FROM quay.io/informaticslab/iris
+
 MAINTAINER niall.robinson@informaticslab.co.uk 
 
 RUN apt-get update \
