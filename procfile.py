@@ -6,17 +6,15 @@ import glob
 
 import iris
 
-sys.path.append("./image-service/")
-from imageservice import procjob, imageproc
+sys.path.append(".")
+import imageproc
 
-def proc_cube(cube, videoname):
-    extent = [cube.coord("grid_longitude").points.min(),
-              cube.coord("grid_longitude").points.max(),
-              cube.coord("grid_latitude").points.min(),
-              cube.coord("grid_latitude").points.max(),]
+def proc_cube(cube):
     for i, frt_cube in enumerate(cube.slices_over("time")):
         print "Processing timestep ", i, "...",
-        img_array, proced_data = procjob.procDataToImage(frt_cube, "", ap.Namespace(extent=extent))
+        img_array = imageproc.tileArray(frt_cube.data)
+        img_array /= img_array.max()
+        img_array *= 255
         print "Writing image"
         with open("data%03d.png" % i, "wb") as img:
             imageproc.writePng(img_array, img, nchannels=3, alpha=False)
@@ -24,7 +22,7 @@ def proc_cube(cube, videoname):
     print "Writing video"
     sp.call(["avconv", "-y",
             "-r", "1", "-i", "data%03d.png",
-            "-r", "1", "-vcodec", "libtheora", "-qscale:v", "2", videoname])
+            "-r", "1", "-vcodec", os.getenv("CODEC", "libtheora"), "-qscale:v", os.getenv("QUALITY", 2), os.getenv("FILE_OUT", "out.ogv"])
     print "Cleaning up"
     fs = glob.glob("./data???.png")
     for f in fs:
@@ -36,4 +34,4 @@ if __name__=="__main__":
         cube = iris.load_cube(os.getenv("FILE_IN"), iris.Constraint(varname))
     else:
         cube = iris.load_cube(os.getenv("FILE_IN"))
-    proc_cube(cube, os.getenv("FILE_OUT"))
+    proc_cube(cube)

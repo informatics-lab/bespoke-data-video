@@ -1,6 +1,3 @@
-#poke
-FROM quay.io/informaticslab/image-service-public
-
 MAINTAINER niall.robinson@informaticslab.co.uk 
 
 RUN apt-get update \
@@ -15,5 +12,7 @@ RUN wget http://www.tortall.net/projects/yasm/releases/yasm-1.2.0.tar.gz \
 ENV PATH /opt/conda/bin:$PATH
 
 ADD procfile.py procfile.py
+ADD packer.py packer.py
+ADD imageproc.py imageproc.py
 
 CMD python2.7 procfile.py
