@@ -22,7 +22,7 @@ def proc_cube(cube):
     print "Writing video"
     sp.call(["avconv", "-y",
             "-r", "1", "-i", "data%03d.png",
-            "-r", "1", "-vcodec", os.getenv("CODEC", "libtheora"), "-qscale:v", os.getenv("QUALITY", 2), os.getenv("FILE_OUT", "out.ogv"])
+            "-r", "1", "-vcodec", os.getenv("CODEC", "libtheora"), "-qscale:v", os.getenv("QUALITY", 2), os.getenv("FILE_OUT", "out.ogv")])
     print "Cleaning up"
     fs = glob.glob("./data???.png")
     for f in fs:
